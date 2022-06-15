@@ -1,0 +1,42 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# fix Remnant characters when tab completing with ZSH
+export LC_ALL="en_US.UTF-8"
+
+# theme
+ZSH_THEME="robbyrussell"
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# update reminder
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# plugins
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
+# fix Remnant characters when tab completing with ZSH
+export LC_ALL="en_US.UTF-8"
+
+# tmux session ===========================
+#!/bin/bash
+session_name="workspace"
+
+# check if a tmux session exists with a given name.
+tmux has-session -t=$session_name 2> /dev/null
+
+# create the session if it doesn't exists.
+if [[ $? -ne 0 ]]; then
+  TMUX='' tmux new-session -d -s "$session_name"
+fi
+
+# attach if outside of tmux, switch if you're in tmux.
+if [[ -z "$TMUX" ]]; then
+  tmux attach -t "$session_name"
+else
+  tmux switch-client -t "$session_name"
+fi
+# ========================================
