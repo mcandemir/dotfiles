@@ -26,7 +26,7 @@ done
 
 
 echo "Copying config files.."
-cp -r /home/$hostname/dotfiles/ /home/$hostname
+cp -r /home/$hostname/dotfiles/.* /home/$hostname/
 
 
 echo "Installation complete."
